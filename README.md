@@ -58,3 +58,10 @@ git clone https://github.com/eouia/MMM-WeatherBackground
 },
 
 ```
+## Tip
+You'd better modify your CSS to enhance visibilties of your modules. Below is just one of examples.
+```CSS
+.module {
+  background-color:rgba(0,0,0,0.5)
+}
+```

@@ -2,7 +2,7 @@
 MagicMirror Module - for Weather image background from Unsplash (like modern web apps - Yahoo weather)
 This is a plugin of other weather modules.
 ## Screenshot
-![Screenshot]()
+![Screenshot](https://github.com/eouia/MMM-WeatherBackground/blob/master/scr.png?raw=true)
 
 ## Installation
 ```shell

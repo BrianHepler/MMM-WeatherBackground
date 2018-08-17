@@ -33,23 +33,23 @@ git clone https://github.com/eouia/MMM-WeatherBackground
     payloadConverter: (payload)=> {
       var iconMap = {
         "01d": "sunny",
-  			"02d": "clouds",
-  			"03d": "cloudy",
-  			"04d": "windy",
-  			"09d": "heavy rain",
-  			"10d": "rain",
-  			"11d": "thunderstorm",
-  			"13d": "snow",
-  			"50d": "fog",
-  			"01n": "clear night",
-  			"02n": "cloudy night",
-  			"03n": "cloudy night",
-  			"04n": "cloudy night",
-  			"09n": "night rain",
-  			"10n": "night rain",
-  			"11n": "night thunderstorm",
-  			"13n": "night snow",
-  			"50n": "windy night"
+        "02d": "clouds",
+        "03d": "cloudy",
+        "04d": "windy",
+        "09d": "heavy rain",
+        "10d": "rain",
+        "11d": "thunderstorm",
+        "13d": "snow",
+        "50d": "fog",
+        "01n": "clear night",
+        "02n": "cloudy night",
+        "03n": "cloudy night",
+        "04n": "cloudy night",
+        "09n": "night rain",
+        "10n": "night rain",
+        "11n": "night thunderstorm",
+        "13n": "night snow",
+        "50n": "windy night"
       }
       return iconMap[payload.data.weather[0].icon] //return value be used for search keyword.
       //other solution: return payload.data.weather[0].description

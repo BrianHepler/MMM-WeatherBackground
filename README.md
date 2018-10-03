@@ -14,17 +14,9 @@ git clone https://github.com/cowboysdude/MMM-WeatherBackground
 ### Simple
 ```javascript
 {
-  module: "MMM-WeatherBackground",
-  // don't assign position.
-  config: {}
-},
-```
-### Defaults & details
-```  
-        {
             disabled: false,
             module: "MMM-WeatherBackground"  
-        } 
-```
+}, 
+``` 
 That's pretty much the entire config entry that can be put anywhere in your config.js
 Sometimes, unsplash could return mismatched images with keyword. 

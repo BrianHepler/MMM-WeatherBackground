@@ -2,7 +2,7 @@
 MagicMirror Module - for Weather image background from Unsplash. This is a plugin of other weather modules.
 
 ## Screenshot
-![Screenshot](https://github.com/eouia/MMM-WeatherBackground/blob/master/scr.png?raw=true)
+![Screenshot](scr.png)
 
 ## Installation
 ```shell

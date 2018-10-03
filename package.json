@@ -1,0 +1,15 @@
+{
+  "name": "mmm-weatherbackground",
+  "version": "3.0.1",
+  "description": "MagicMirror Module - for Weather image background from Unsplash. This is a plugin of other weather modules.",
+  "main": "MMM-WeatherBackground.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "request": "^2.88.0"
+  },
+  "devDependencies": {}
+}

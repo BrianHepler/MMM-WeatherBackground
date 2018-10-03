@@ -2,32 +2,73 @@
 // MMM-WeatherBackground
 //
 
+//
+// MMM-WeatherBackground
+//
+
+var sunset;
+
 Module.register("MMM-WeatherBackground", {
+	
+	getStyles: function() {
+		this.sendSocketNotification('GET_INFO');
+        return ["MMM-WeatherBackground.css"]; 
+    },
+	 
+  socketNotificationReceived: function(notification, payload) {
+        if (notification === "SRSS_RESULTS") { 
+		   sunset = payload.results.sunset; 
+        }
+    },
+  
   defaults: {
     targetDOM: ".fullscreen.below", //null or DomSelector for target. (if null, currentweather will be targeted.)
-    notification: "CURRENTWEATHER_DATA", //if you use other weather module, modify this.
+    notification: "WEATHER", //if you use other weather module, modify this.
+	
     payloadConverter: (payload)=> {
+		 payload = payload.icon; 
+         sunset = moment(sunset).format('HH'), 
+		//working-> console.log(sunset),
+		 now = moment().format('HH');
+		 console.log("now: "+now+ "Sunset: "+sunset);
+		  
+		 if (now >= sunset) {
+			  var iconMap = {
+		    "clear": "clear night",
+  			"sleet": "sleet night",
+  			"mostlycloudy": "cloudy night",
+  			"cloudy": "cloudy night",
+  			"rain": "night rain",
+  			"drizzle": "drizzle rain night",
+  			"thunderstorm": "night thunderstorm",
+  			"snow": "snow night",
+  			"windy": "windy night",
+			"fog":"fog night",
+			"overcast":"overcast night"
+	  } 
+	   console.log(iconMap[payload]);	
+	  return iconMap[payload] //return value be used for search keyword.
+			 
+		 } else {	
+			 
       var iconMap = {
-        "01d": "sunny",
-  			"02d": "clouds",
-  			"03d": "cloudy",
-  			"04d": "windy",
-  			"09d": "heavy rain",
-  			"10d": "rain",
-  			"11d": "thunderstorm",
-  			"13d": "snow",
-  			"50d": "fog",
-  			"01n": "clear night",
-  			"02n": "cloudy night",
-  			"03n": "cloudy night",
-  			"04n": "cloudy night",
-  			"09n": "night rain",
-  			"10n": "night rain",
-  			"11n": "night thunderstorm",
-  			"13n": "night snow",
-  			"50n": "windy night"
+            "cloudy": "clouds",
+  			"mostlycloudy": "clouds",
+  			"overcast": "overcast",
+  			"wind": "windy",
+  			"rain": "heavy rain",
+  			"rain": "rain",
+  			"thunderstorm": "thunderstorm",
+  			"snow": "snow",
+  			"fog": "fog",
+  			"clear": "clear",
+  			"sleet": "sleet",
+			"overcast":"overcast"
       }
-      return iconMap[payload.data.weather[0].icon] //return value be used for search keyword.
+      console.log(iconMap[payload]+"day");	  
+	  return iconMap[payload] //return value be used for search keyword.
+	  
+		 }
     },
   },
 

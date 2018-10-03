@@ -18,5 +18,6 @@ git clone https://github.com/cowboysdude/MMM-WeatherBackground
             module: "MMM-WeatherBackground"  
 }, 
 ``` 
-That's pretty much the entire config entry that can be put anywhere in your config.js
+That's pretty much the entire config entry that can be put anywhere in your config.js.
+## BE AWARE
 Sometimes, unsplash could return mismatched images with keyword. 

@@ -2,7 +2,12 @@
 MagicMirror Module - for Weather image background. This is a plugin of other weather modules.
 
 ## Screenshot
+  Day
 ![Screenshot](scr.png)
+
+  Night 
+![Screenshot](scr1.png)
+
 
 ## Installation
 ```shell

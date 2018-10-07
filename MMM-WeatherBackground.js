@@ -1,6 +1,6 @@
 //
 // MMM-WeatherBackground
-//
+//  Modified by Cowboysdude for MMM-NOAA3
 var sunset;
 
 Module.register("MMM-WeatherBackground", {

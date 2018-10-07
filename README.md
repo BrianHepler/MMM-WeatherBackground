@@ -1,5 +1,5 @@
 # MMM-WeatherBackground
-MagicMirror Module - for Weather image background from Unsplash. This is a plugin of other weather modules.
+MagicMirror Module - for Weather image background. This is a plugin of other weather modules.
 
 ## Screenshot
 ![Screenshot](scr.png)

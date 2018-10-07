@@ -20,7 +20,11 @@ git clone https://github.com/cowboysdude/MMM-WeatherBackground
 ```javascript
 {
             disabled: false,
-            module: "MMM-WeatherBackground"  
+            module: "MMM-WeatherBackground",
+            config: {
+            opacity: "0.3" //This is the color behind the modules so you can see them better.   Higher the number the darker the color
+            //  default in module is set to 0.4
+            }
 }, 
 ``` 
 That's pretty much the entire config entry that can be put anywhere in your config.js.

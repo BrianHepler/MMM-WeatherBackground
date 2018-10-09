@@ -1,27 +1,21 @@
 //
 // MMM-WeatherBackground
 //  Modified by Cowboysdude for MMM-NOAA3
+
+// Whirlpool Washing Machine Model WTW4815EW1
 var sunset;
 
 Module.register("MMM-WeatherBackground", {
-
-    socketNotificationReceived: function(notification, payload) {
-        if (notification === "SRSS_RESULTS") {
-            sunset = payload.results.sunset;
-        }
-    },
 
     defaults: {
         targetDOM: ".fullscreen.below", //null or DomSelector for target. (if null, currentweather will be targeted.)
         notification: "WEATHER", //if you use other weather module, modify this.
         opacity: '0.3',
-        payloadConverter: (payload) => {
-            console.log('this is from weatherbackground ' + JSON.stringify(payload))
-            payload = payload.icon;
-            sunset = moment(sunset).format('HH'),
-                now = moment().format('HH');
-            console.log("now: " + now + " Sunset: " + sunset);
-            console.log(payload);
+        payloadConverter: (payload) => { 
+            payload = payload.icon,            
+            now = moment().format('HH');
+          //console.log("now: " + now + " Sunset: " + sunset);
+          //  console.log(payload);
             if (now >= sunset) {
                 var iconMap = {
                     "clear": "modules/MMM-WeatherBackground/images/n_clear.jpg",
@@ -72,15 +66,22 @@ Module.register("MMM-WeatherBackground", {
             myElement[i].style.padding = "10px 10px 10px 10px";
         }
     },
-
+	
+   socketNotificationReceived: function(notification, payload) {
+        if (notification === "SRSS_RESULTS") {
+             sunset = payload;
+			 //console.log(sunset);
+			 return sunset;
+        }
+    },
 
     notificationReceived: function(noti, payload, sender) {
         switch (noti) {
             case "DOM_OBJECTS_CREATED":
+			this.sendSocketNotification('GET_INFO');
                 break
             case this.config.notification:
-                var target = (this.config.targetDOM) ? this.config.targetDOM : "#" + sender.data.identifier
-
+                var target = (this.config.targetDOM) ? this.config.targetDOM : "#" + sender.data.identifier 
                 var t = this.config.payloadConverter(payload)
                 this.loadImage(target, t)
                 this.Css()

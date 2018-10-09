@@ -4,6 +4,7 @@
  */
 var NodeHelper = require("node_helper");
 const request = require('request');
+const dayjs = require('dayjs');
 var lat, lon;
 
 module.exports = NodeHelper.create({
@@ -25,7 +26,7 @@ module.exports = NodeHelper.create({
         }, (error, response, body) => {
             var info = JSON.parse(body);
             lat = info.latitude;
-            lon = info.longitude;
+            lon = info.longitude; 
             this.getSRSS();
         });
     },
@@ -37,7 +38,9 @@ module.exports = NodeHelper.create({
         }, (error, response, body) => {
             if (!error && response.statusCode === 200) {
                 var result = JSON.parse(body);
-                this.sendSocketNotification("SRSS_RESULTS", result); 
+				let sunset = result.results.sunset;
+				let SS = dayjs(sunset).format('HH'); 
+                this.sendSocketNotification("SRSS_RESULTS", SS);  
             }
         });
     }

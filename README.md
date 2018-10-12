@@ -13,6 +13,8 @@ MagicMirror Module - for Weather image background. This is a plugin of other wea
 ```shell
 cd ~/MagicMirror/modules
 git clone https://github.com/cowboysdude/MMM-WeatherBackground
+cd MMM-WeatherBackground
+npm install in the MMM-WeatherBackground directory
 ```
 
 ## Configuration

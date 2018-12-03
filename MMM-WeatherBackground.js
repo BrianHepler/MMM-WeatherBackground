@@ -84,6 +84,7 @@ Module.register("MMM-WeatherBackground", {
         console.log(description)
         var url = `https://source.unsplash.com/featured/?"${description}"&s=${seed}`
         dom.style.backgroundSize = "cover"
+        dom.style.backgroundPosition = "center"
         dom.style.transition = "background-image 1s ease 1s"
         var url = `url('${url}')`
         dom.style.backgroundImage = url

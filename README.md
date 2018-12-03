@@ -4,6 +4,15 @@ This is a plugin of other weather modules.
 ## Screenshot
 ![Screenshot]()
 
+
+## UPDATED
+**[2018-12-03]**
+- Now you can simply set `source` instead complex notification & payloadConverter
+  - `MMM-DarkSkyForecast` is supported as `source`
+  - Currently supported source : `currentweather`, `MMM-NOAA3`, `MMM-DarkSkyForecast`
+- Background image position is centered now. 
+
+
 ## Installation
 ```shell
 cd ~/MagicMirror/modules
@@ -27,33 +36,7 @@ git clone https://github.com/eouia/MMM-WeatherBackground
     targetDOM: ".fullscreen.below", //null or DomSelector for target.
     // if null, currentweather will be targeted.
     // examples: ".newsfeed", "#SOME_SPECIAL_DOM", ".top.left .module"
-
-    // You don't need to care about belows;
-    notification: "CURRENTWEATHER_DATA", //if you want to use other notification, modify this.
-    payloadConverter: (payload)=> {
-      var iconMap = {
-        "01d": "sunny",
-  			"02d": "clouds",
-  			"03d": "cloudy",
-  			"04d": "windy",
-  			"09d": "heavy rain",
-  			"10d": "rain",
-  			"11d": "thunderstorm",
-  			"13d": "snow",
-  			"50d": "fog",
-  			"01n": "clear night",
-  			"02n": "cloudy night",
-  			"03n": "cloudy night",
-  			"04n": "cloudy night",
-  			"09n": "night rain",
-  			"10n": "night rain",
-  			"11n": "night thunderstorm",
-  			"13n": "night snow",
-  			"50n": "windy night"
-      }
-      return iconMap[payload.data.weather[0].icon] //return value be used for search keyword.
-      //other solution: return payload.data.weather[0].description
-    },
+    source: "currentweather", // "currentweather", "MMM-NOAA3", "MMM-DarkSkyForecast"
   }
 },
 

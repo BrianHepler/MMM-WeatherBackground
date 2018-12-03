@@ -40,28 +40,7 @@ git clone https://github.com/eouia/MMM-WeatherBackground
   }
 },
 ```
-### Example for using with MMM-NOAA3
-```
-{
-  module: "MMM-WeatherBackground",
-  config: {
-    targetDOM: ".MMM-Dummy",
-    notification: "WEATHER",
-    payloadConverter:(payload)=>{
-      var n = (moment().isAfter(moment(payload.sunset))) ? "night" : "day"
-      var ret = payload.icon
-      var iconMap = {
-          "tstorms": "thunderstorm",
-          "chancesnow": "snow"
-      }
-      if (ret in iconMap) {
-        ret = iconMap[ret]
-      }
-      return ret + " " + n
-    }
-  }
-},
-```
+
 ## Tip
 You'd better modify your CSS to enhance visibilties of your modules. Below is just one of examples.
 ```CSS

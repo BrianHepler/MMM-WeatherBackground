@@ -81,7 +81,6 @@ Module.register("MMM-WeatherBackground", {
     var drawImage = function(dom) {
       var timer = setTimeout(()=>{
         var seed = Date.now()
-        console.log(description)
         var url = `https://source.unsplash.com/featured/?"${description}"&s=${seed}`
         dom.style.backgroundSize = "cover"
         dom.style.backgroundPosition = "center"

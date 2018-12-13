@@ -42,8 +42,8 @@ git clone https://github.com/eouia/MMM-WeatherBackground
     source : "currentweather", // `currentweather`, `MMM-NOAA3`, `MMM-DarkSkyForecast`
     defaultCollection: "featured", // If not assigned in collections, this will be used.
     collections: {
-      "clear-day": "collection/1877260", // assign specific collection to keyword.
-      //In this case, if weather keyword be "clear-day", "collection/1877260" will be used as source.
+      "clear-day": "1877260", // assign specific collection to keyword.
+      //In this case, if weather keyword be "clear-day", "1877260"(https://unsplash.com/collections/1877260/summer-sunny-vacation) will be used as source.
     },
   }
 },

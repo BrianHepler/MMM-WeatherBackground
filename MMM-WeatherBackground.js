@@ -9,7 +9,7 @@ Module.register("MMM-WeatherBackground", {
     notification: null, //if you use other weather module, modify this.
     defaultCollection: "featured", // If not assigned in collections, this will be used.
     collections: {
-      "clear-day": "collection/1877260", // assign specific collection to keyword.
+      "clear-day": "1877260", // assign specific collection to keyword.
     },
     sources: {
       "currentweather": {
@@ -83,7 +83,7 @@ Module.register("MMM-WeatherBackground", {
   loadImage: function(target, description) {
     console.log("[WTHBGR] Image searching:", description)
     var collection = (Object.keys(this.config.collections).indexOf(description) >= 0)
-      ? this.config.collections[description]
+      ? "collection/" + this.config.collections[description]
       : this.config.defaultCollection
     var drawImage = (dom) => {
       var timer = setTimeout(()=>{

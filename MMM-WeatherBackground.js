@@ -7,7 +7,10 @@ Module.register("MMM-WeatherBackground", {
     source: "currentweather",
     targetDOM: ".fullscreen.below", //null or DomSelector for target. (if null, currentweather will be targeted.)
     notification: null, //if you use other weather module, modify this.
-    payloadConverter: null,
+    defaultCollection: "featured", // If not assigned in collections, this will be used.
+    collections: {
+      "clear-day": "collection/1877260", // assign specific collection to keyword.
+    },
     sources: {
       "currentweather": {
         notification: "CURRENTWEATHER_DATA", //if you use other weather module, modify this.
@@ -78,11 +81,15 @@ Module.register("MMM-WeatherBackground", {
   },
 
   loadImage: function(target, description) {
-    var drawImage = function(dom) {
+    console.log("[WTHBGR] Image searching:", description)
+    var collection = (Object.keys(this.config.collections).indexOf(description) >= 0)
+      ? this.config.collections[description]
+      : this.config.defaultCollection
+    var drawImage = (dom) => {
       var timer = setTimeout(()=>{
         var seed = Date.now()
-        console.log(description)
-        var url = `https://source.unsplash.com/featured/?"${description}"&s=${seed}`
+        var url = `https://source.unsplash.com/${collection}/?${description}&s=${seed}`
+        console.log(url)
         dom.style.backgroundSize = "cover"
         dom.style.backgroundPosition = "center"
         dom.style.transition = "background-image 1s ease 1s"

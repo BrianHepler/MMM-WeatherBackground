@@ -6,6 +6,9 @@ MagicMirror Module - for Weather image background from Unsplash. This is a plugi
 
 
 ## UPDATED
+**[2018-12-13]**
+- Now you can assign specific(yours or other's) collection to get more exact or customized pictures.
+
 **[2018-12-03]**
 - Now you can simply set `source` instead complex notification & payloadConverter
   - `MMM-DarkSkyForecast` is supported as `source`
@@ -37,6 +40,11 @@ git clone https://github.com/eouia/MMM-WeatherBackground
     // if null, currentweather will be targeted.
     // examples: ".newsfeed", "#SOME_SPECIAL_DOM", ".top.left .module"
     source : "currentweather", // `currentweather`, `MMM-NOAA3`, `MMM-DarkSkyForecast`
+    defaultCollection: "featured", // If not assigned in collections, this will be used.
+    collections: {
+      "clear-day": "collection/1877260", // assign specific collection to keyword.
+      //In this case, if weather keyword be "clear-day", "collection/1877260" will be used as source.
+    },
   }
 },
 ```

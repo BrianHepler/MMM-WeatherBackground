@@ -6,6 +6,16 @@ MagicMirror Module - for Weather image background from Unsplash. This is a plugi
 
 
 ## UPDATED
+**[2019-05-01]**
+- Now you must not assign specific (yours or other's) collection to get more exact or customized pictures.
+- No need to set collections as they are predetermined in the module, reflecting the different weather conditions, day or night, and the different seasons of the year.
+- If you mistakenly maintain the collections configuration, the default collections will not work and those you define either, since the keywords have changed.
+- defaultCollection: "featured" is no longer necessary in config.js.
+- New hemisphere option in config.js for the module to deliver photos according to the season of the year.
+- If the hemisphere configuration is different from "n" or "s", it will load an error image.
+- The collections option in config.js is deprecated.
+- If the collections configuration is maintained, it will load an error image.
+
 **[2018-12-13]**
 - Now you can assign specific(yours or other's) collection to get more exact or customized pictures.
 
@@ -32,20 +42,15 @@ git clone https://github.com/eouia/MMM-WeatherBackground
 },
 ```
 ### Defaults & details
-```javascript
 {
-  module: "MMM-WeatherBackground",
-  config: {
-    targetDOM: ".fullscreen.below", //null or DomSelector for target.
-    // if null, currentweather will be targeted.
-    // examples: ".newsfeed", "#SOME_SPECIAL_DOM", ".top.left .module"
-    source : "currentweather", // `currentweather`, `MMM-NOAA3`, `MMM-DarkSkyForecast`
-    defaultCollection: "featured", // If not assigned in collections, this will be used.
-    collections: {
-      "clear-day": "1877260", // assign specific collection to keyword.
-      //In this case, if weather keyword be "clear-day", "1877260"(https://unsplash.com/collections/1877260/summer-sunny-vacation) will be used as source.
-    },
-  }
+	module: "MMM-WeatherBackground",
+	config: {
+	  targetDOM: ".MMM-Dummy", //null or DomSelector for target.
+		// if null, currentweather will be targeted.
+		// examples: ".newsfeed", "#SOME_SPECIAL_DOM", ".top.left .module"
+		hemisphere: "n", // "n" (north) or "s" (southern) to establish the correct season of the year.
+		source : "MMM-NOAA3", // `currentweather`, `MMM-NOAA3`, `MMM-DarkSkyForecast`
+		}
 },
 ```
 

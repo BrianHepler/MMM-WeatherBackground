@@ -8,11 +8,12 @@ Module.register("MMM-WeatherBackground", {
 	hemisphere: "n",
     targetDOM: ".fullscreen.below", //null or DomSelector for target. (if null, currentweather will be targeted.)
     notification: null, //if you use other weather module, modify this.
-    defaultCollection: "featured", // If not assigned in collections, this will be used.
+    defaultCollection: "4733334", // Should not be assigned in collections, this will be used.
     collections: {
-      //"clear-day": "1877260", // assign specific collection to keyword.
-	  
+      	  
 	  ///////////////////// check
+	  
+	  "error": "4733180", // ✓ Collection for hemisphere error (different from "n" or "s".
 	  
 	  "clear-day spring": "4685704", // ✓
 	  "clear-day summer": "4686133", // ✓
@@ -58,9 +59,9 @@ Module.register("MMM-WeatherBackground", {
 	  "wind autumn": "4687039", // ✓
 	  "wind winter": "4686925", // ✓
 	  
-	  "rain spring": "4613732", // ✓
+	  "rain spring": "4712657", // ✓
 	  "rain summer": "4613732", // ✓
-	  "rain autumn": "4613732", // ✓
+	  "rain autumn": "4712671", // ✓
 	  "rain winter": "4613732", // ✓
 	  
 	  "clear-night spring": "4687275", // ✓
@@ -103,9 +104,9 @@ Module.register("MMM-WeatherBackground", {
 	  "hail autumn": "4710975", // ✓
 	  "hail winter": "4710975", // ✓
 	  
-	  "sleet spring": "4613732", // x
+	  "sleet spring": "4712657", // x
 	  "sleet summer": "4613732", // x
-	  "sleet autumn": "4613732", // x
+	  "sleet autumn": "4712671", // x
 	  "sleet winter": "4613732", // x
 	  
 	  // currentweather
@@ -124,9 +125,9 @@ Module.register("MMM-WeatherBackground", {
 	  "cloudy windy autumn": "4687003", // ✓
 	  "cloudy windy winter": "4686964", // ✓
 	  
-	  "showers spring": "4613732", // ✓
+	  "showers spring": "4712657", // ✓
 	  "showers summer": "4613732", // ✓
-	  "showers autumn": "4613732", // ✓
+	  "showers autumn": "4712671", // ✓
 	  "showers winter": "4613732", // ✓
 	  
 	  "heavy rain spring": "4613730", // ✓
@@ -193,18 +194,18 @@ Module.register("MMM-WeatherBackground", {
 	  "chanceflurries night autumn": "4677630", // x
 	  "chanceflurries night winter": "4677630", // x
 	  
-	  "chancerain day spring": "4613732", // ✓
+	  "chancerain day spring": "4712657", // ✓
 	  "chancerain day summer": "4613732", // ✓
-	  "chancerain day autumn": "4613732", // ✓
+	  "chancerain day autumn": "4712671", // ✓
 	  "chancerain day winter": "4613732", // ✓
 	  "chancerain night spring": "4613625", // ✓
 	  "chancerain night summer": "4613625", // ✓
 	  "chancerain night autumn": "4613625", // ✓
 	  "chancerain night winter": "4613625", // ✓
 	  
-	  "chancesleet day spring": "4613732", // x
+	  "chancesleet day spring": "4712657", // x
 	  "chancesleet day summer": "4613732", // x
-	  "chancesleet day autumn": "4613732", // x
+	  "chancesleet day autumn": "4712671", // x
 	  "chancesleet day winter": "4613732", // x
 	  "chancesleet night spring": "4613625", // x
 	  "chancesleet night summer": "4613625", // x
@@ -328,18 +329,18 @@ Module.register("MMM-WeatherBackground", {
 	  "partlycloudy night autumn": "4618856", // ✓
 	  "partlycloudy night winter": "4618856", // ✓
 	  
-	  "rain day spring": "4613732", // ✓
+	  "rain day spring": "4712657", // ✓
 	  "rain day summer": "4613732", // ✓
-	  "rain day autumn": "4613732", // ✓
+	  "rain day autumn": "4712671", // ✓
 	  "rain day winter": "4613732", // ✓
 	  "rain night spring": "4613625", // ✓
 	  "rain night summer": "4613625", // ✓
 	  "rain night autumn": "4613625", // ✓
 	  "rain night winter": "4613625", // ✓
 	  
-	  "sleet day spring": "4613732", // x
+	  "sleet day spring": "4712657", // x
 	  "sleet day summer": "4613732", // x
-	  "sleet day autumn": "4613732", // x
+	  "sleet day autumn": "4712671", // x
 	  "sleet day winter": "4613732", // x
 	  "sleet night spring": "4613625", // x
 	  "sleet night summer": "4613625", // x
@@ -424,7 +425,7 @@ Module.register("MMM-WeatherBackground", {
       }
     }	
   },
-  //////////////////////////////// check
+//////////////////////////////// Necessary to obtain the month of the year.
 	  getScripts: function() {
 		  return ['moment.js']
 	  },
@@ -437,8 +438,7 @@ Module.register("MMM-WeatherBackground", {
 
   notificationReceived: function(noti, payload, sender) {
 	//////////// check
-	var now = moment().format('M')
-	//var now = 2	
+	var now = moment().format('M')		
 	var season
 	if(now>2 && now<6 && this.config.hemisphere=="n") {
 		season = "spring"
@@ -456,23 +456,27 @@ Module.register("MMM-WeatherBackground", {
 		season = "winter"
 	} else if(now>11 || now<3 && this.config.hemisphere=="s") {
 		season = "summer"	
+	} else if(this.config.hemisphere!="n" && this.config.hemisphere!="s") {
+		season = "error"
 	}	
-	
-	//console.log(this.config.hemisphere + ' ' + now)
-	////////////    
-	
+		
 	switch(noti) {
       case "DOM_OBJECTS_CREATED" :
         break
       case this.listenNotification :
-        var target = (this.config.targetDOM) ? this.config.targetDOM : "#" + sender.data.identifier
-        //var t = this.payloadConverter(payload)
-		/////////////////////////////////////////// check
-		var t = this.payloadConverter(payload) + " " + season
-		////////////////////////////////////////////////////////
-        this.loadImage(target, t)		
-        break
+		if(season=="error"){ // load error image if hemisphere is not "n" neither "s"
+			var target = (this.config.targetDOM) ? this.config.targetDOM : "#" + sender.data.identifier
+			var t = season
+			this.loadImage(target, t)
+			break
+		} else {
+			var target = (this.config.targetDOM) ? this.config.targetDOM : "#" + sender.data.identifier
+        	var t = this.payloadConverter(payload) + " " + season
+			this.loadImage(target, t)		
+			break
+		}	
     }
+	////////////
   },
 
   loadImage: function(target, description) {
@@ -481,7 +485,7 @@ Module.register("MMM-WeatherBackground", {
 	
       var collection = (Object.keys(this.config.collections).indexOf(description) >= 0)
       ? "collection/" + this.config.collections[description]
-      : this.config.defaultCollection
+      : "collection/" + this.config.defaultCollection // load error image setting collection deprecated in config.js
     var drawImage = (dom) => {
       var timer = setTimeout(()=>{
         var seed = Date.now()

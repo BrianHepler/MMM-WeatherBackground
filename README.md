@@ -6,7 +6,7 @@ MagicMirror Module - for Weather image background from Unsplash. This is a plugi
 
 
 ## UPDATED
-**[2019-05-01]**
+**[2019-05-01]** (PR by @mohace)
 - Now you must not assign specific (yours or other's) collection to get more exact or customized pictures.
 - No need to set collections as they are predetermined in the module, reflecting the different weather conditions, day or night, and the different seasons of the year.
 - If you mistakenly maintain the collections configuration, the default collections will not work and those you define either, since the keywords have changed.

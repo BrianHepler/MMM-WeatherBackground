@@ -12,16 +12,15 @@ Module.register("MMM-WeatherBackground", {
         targetDOM: ".fullscreen.below", //null or DomSelector for target. (if null, currentweather will be targeted.)
         notification: "WEATHER", //if you use other weather module, modify this.
         opacity: '0.3',
-        payloadConverter: (payload) => { 
-		console.log(payload),
+        payloadConverter: (payload) => {  
              icon = payload.icon,
              sunset = moment(payload.sunset).format('HH'),  
-            now = moment().format('HH'),
+             now = moment().format('HH'),
 		console.log("Now time :"+now+" Sunset :"+sunset);
 			if (now >= sunset) {
                 var iconMap = {
-					"breezy": "modules/MMM-WeatherBackground/images/n_bao.jpg",
-					"broken clouds":"modules/MMM-WeatherBackground/images/n_brokenclouds.jpg",
+		    "breezy": "modules/MMM-WeatherBackground/images/n_bao.jpg",
+		    "broken clouds":"modules/MMM-WeatherBackground/images/n_brokenclouds.jpg",
                     "clear": "modules/MMM-WeatherBackground/images/n_clear.jpg",
                     "sleet": "modules/MMM-WeatherBackground/images/n_sleet.jpg",
                     "mostlycloudy": "modules/MMM-WeatherBackground/images/n_mostlycloudy.jpg",
@@ -45,8 +44,8 @@ Module.register("MMM-WeatherBackground", {
             } else {
 
                 var iconMap = {
-					"breezy": "modules/MMM-WeatherBackground/images/bao.jpg",
-					"brokenclouds":"modules/MMM-WeatherBackground/images/brokenclouds.jpg",
+		    "breezy": "modules/MMM-WeatherBackground/images/bao.jpg",
+		    "brokenclouds":"modules/MMM-WeatherBackground/images/brokenclouds.jpg",
                     "sunny": "modules/MMM-WeatherBackground/images/clear.jpg",
                     "clear": "modules/MMM-WeatherBackground/images/clear.jpg",
                     "cloudy": "modules/MMM-WeatherBackground/images/cloudy.jpg",

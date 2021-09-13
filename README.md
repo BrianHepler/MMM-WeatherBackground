@@ -42,6 +42,7 @@ git clone https://github.com/eouia/MMM-WeatherBackground
 },
 ```
 ### Defaults & details
+```js
 {
 	module: "MMM-WeatherBackground",
 	config: {

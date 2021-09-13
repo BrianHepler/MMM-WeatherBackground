@@ -16,8 +16,10 @@ MagicMirror Module - for Weather image background from Unsplash. This is a plugi
 - **ADDED** CSS controllable. Now you can control the style(CSS selector `.WTHBGR`) more comfortably.
 - **CHANGED** Current collection list was too huge and not maintained. Now Collection fallback is supported. When the module cannot find a proper collection, the keyword searching would be alternated instead.
 - **CHANGED** Now, collection matching is based on match-score. 
+- 
 For example;
-** collections.json **
+
+When the collections are set like the belows;
 ```json
 {
 "cloudy" : "12345",

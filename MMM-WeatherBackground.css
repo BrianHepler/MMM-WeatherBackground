@@ -1,0 +1,6 @@
+.WTHBGR {
+  background-position: center;
+  background-size: cover;
+  transition: background-image 1s ease 1s;
+  filter: brightness(0.8);
+}

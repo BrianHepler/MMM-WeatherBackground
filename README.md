@@ -8,7 +8,7 @@ MagicMirror Module - for Weather image background from Unsplash. This is a plugi
 ## UPDATED
 **[2021-09-13]**
 - **REMOVED** Removing dependency of dying `momentJS`
-- **ADDED** `config.monthMap` : Now you can define keywords per month. (It could be the replacement of `config.hemisphere`). You can set `winter christmas santa-clause` as keyword for `December`.
+- **ADDED** `config.monthMap` : Now you can define keywords per month. (It could be the replacement of `config.hemisphere`). You can set `winter christmas santa-clause` as keyword for `December`. Or you can set `spring` to `March`, `April`, `May`.
 - **ADDED** `config.externalCollections` : separated collections data to external file.
 - **ADDED** `config.size` is added. you can set pictures original dimension by this value. (this value is not for cropping. Rather for resolution optimizing.)
 - **CHANGED** Default weather module source - `weather` is added.

@@ -69,9 +69,9 @@ git clone https://github.com/BrianHepler/MMM-WeatherBackground
 ### Defaults & details
 ```js
 {
-	module: "MMM-WeatherBackground",
-	config: {
-	  verbose: false, // If you want to leave some log message, set this as true
+  module: "MMM-WeatherBackground",
+  config: {
+    verbose: false, // If you want to leave some log message, set this as true
     source: "weather", // "weather", "MMM-NOAA3", "MMM-DarkskyForecast".  If you want to use different source, manually set `notification` and `payloadConverter`
     size: null, // "1920x480", whatever....
     hemisphere: "n", // 'n', 's' or null/false  (For backward compatibility) // will be deprecated. use monthMap instead.
@@ -84,6 +84,6 @@ git clone https://github.com/BrianHepler/MMM-WeatherBackground
     defaultCollection: null, // When matched collection not found, this will be used.
     externalCollections: "collections.json", // or null. // I recommend you rename this file to prevent update-conflicts.
     collections: {}, // This will be combined with externalCollections. (For backward compatibility)
-	}
+  }
 },
 ```

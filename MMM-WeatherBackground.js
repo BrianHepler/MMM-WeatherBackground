@@ -10,9 +10,7 @@ Module.register("MMM-WeatherBackground", {
     source: "weather",
     size: null, // "1920x480", whatever....
     hemisphere: "n", // 'n', 's' or null/false  // will be deprecated. use monthMap instead.
-    monthMap: ['NewYear', 'winter', 'spring', 'spring flower', 'joy', 'summer rain', 'summer beach', 'summer vacation', 'autumn', 'autumn leaves', 'winter', 'christmas'],
-    //monthMap: ['winter', 'winter', 'spring', 'spring', 'spring', 'summer', 'summer', 'summer', 'autumn', 'autumn', 'autumn', 'winter'],
-    //monthMap: null, false, or []
+    monthMap: ['NewYear', 'winter', 'spring', 'spring flower', 'bright', 'summer heat', 'summer beach', 'summer vacation', 'autumn', 'autumn leaves', 'winter', 'christmas'],
     targetDOM: ".fullscreen.below", //null or DomSelector for target. (if null, weather will be targeted.)
     notification: null, //if you use other weather module, modify this.
     payloadConverter: null,
@@ -53,6 +51,7 @@ Module.register("MMM-WeatherBackground", {
       "MMM-DarkSkyForecast": {
         notification: "DARK_SKY_FORECAST_WEATHER_UPDATE",
         payloadConverter: (payload) => {
+          console.log("Payload: " + payload.currently.icon);
           return payload.currently.icon
         }
       }
@@ -65,12 +64,7 @@ Module.register("MMM-WeatherBackground", {
 
   start: function () {
     this.collections = {}
-    const hemisphere = {
-      n: ['winter', 'winter', 'spring', 'spring', 'spring', 'summer', 'summer', 'summer', 'autumn', 'autumn', 'autumn', 'winter'],
-      s: [ 'summer', 'summer', 'autumn', 'autumn', 'autumn', 'winter', 'winter', 'winter', 'spring', 'spring', 'spring', 'summer' ]
-    }
-    
-    this.monthMap = (Object.keys(hemisphere).includes(this.config.hemisphere)) ? hemisphere[this.config.hemisphere] : this.config.monthMap
+    this.monthMap = this.config.monthMap;
     this.source =
       typeof this.config.sources[this.config.source] !== undefined
         ? this.config.sources[this.config.source]
@@ -114,18 +108,18 @@ Module.register("MMM-WeatherBackground", {
   },
 //https://source.unsplash.com/collection/4733334/?winter,day,cloudy&s=1631542013371
   loadImage: function (target, {monthKeyword, description} = {}) {
-    console.log("this.collections", this.collections)
-    var seed = Date.now()
-    var convertedKeywords = (monthKeyword + ' ' + description).split(' ')
-    var score = 0
-    var matchedCollection = this.config.defaultCollection ?? null
+    if (this.config.verbose) console.log("this.collections", this.collections);
+    var seed = Date.now();
+    var convertedKeywords = (monthKeyword + ' ' + description).split(' ');
+    var score = 0;
+    var matchedCollection = this.config.defaultCollection ?? null;
+    if (this.config.verbose) console.log('Keywords, converted keywords, intersection, score, matched collection');
     for (let [keywords, collection] of Object.entries(this.collections)) {
-      var intersection = keywords.split(' ').filter(x => convertedKeywords.includes(x)).length
-
-      console.log(keywords, convertedKeywords, intersection, score, matchedCollection)
+      var intersection = keywords.split(' ').filter(x => convertedKeywords.includes(x)).length;
+      if (this.config.verbose) console.log(keywords, convertedKeywords, intersection, score, matchedCollection);
       if (score < intersection) {
-        score = intersection
-        matchedCollection = collection
+        score = intersection;
+        matchedCollection = collection;
       }
     }
 

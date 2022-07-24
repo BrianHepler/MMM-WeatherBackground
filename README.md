@@ -33,7 +33,7 @@ git clone https://github.com/BrianHepler/MMM-WeatherBackground
 |Option | Default | Description |
 |--------|--------|----|
 |verbose| `false` | Enable log messages.|
-|source| `weather` | Which weather module to use for image searches. Possible values:  `weather`,  `MMM-NOAA3`,  `MMM-DarkskyForecast` **Note:** Dark Sky is
+|source| `weather` | Which weather module to use for image searches. Possible values:  `weather`,  `MMM-NOAA3`, `MMM-OpenWeatherForecast`, `MMM-DarkskyForecast` **Note:** Dark Sky is
 scheduled to cease operation at the end of 2022.|
 | size | `null` | The size of the image. This does not resize the image, but is for display optimization. Values: '1920x1080', '720x480', etc. |
 | hemisphere | `n` | Deprecated. |

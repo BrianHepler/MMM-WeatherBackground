@@ -41,13 +41,10 @@ Module.register("MMM-WeatherBackground", {
         notification: "WEATHER",
         payloadConverter: (payload) => {
           var now = new Date();
-          var sunset = payload.sunset.split(":");
           var sunsetTime = new Date(
             now.getFullYear(),
             now.getMonth(),
-            now.getDay(),
-            sunset[0],
-            sunset[1]
+            now.getDay()
           );
           var n = now.getTime() >= sunsetTime.getTime() ? "night" : "day";
           var ret = payload.icon;

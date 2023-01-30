@@ -115,6 +115,9 @@ When the collections are set like the belows;
 In this case, If `.payloadConverter()` returns `cloudy day summer`, `cloudy summer` will be selected as `collection` because it matches better. If `.payloadConverter()` returns `thunderstorm winter`, `cloudy winter` will be selected. If `.payloadConvert()` returns `spring sunny`, no collection matched so keyword searching `spring, sunny` will be executed.
 So, you don't need to describe all possible collections. Just keep essential key collections.
 
+**[2023-01-29]**
+- Fixed the logic that detects daytime vs nighttime for NOAA3 sourced weather data. Thanks to @salvega90 for the bug fix.
+
 **[2019-05-01]** (PR by @mohace)
 
 - Now you must not assign specific (yours or other's) collection to get more exact or customized pictures.

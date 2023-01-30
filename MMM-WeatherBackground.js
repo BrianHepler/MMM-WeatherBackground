@@ -41,11 +41,22 @@ Module.register("MMM-WeatherBackground", {
         notification: "WEATHER",
         payloadConverter: (payload) => {
           var now = new Date();
-          var sunsetTime = new Date(
-            now.getFullYear(),
-            now.getMonth(),
-            now.getDay()
-          );
+          if (payload.sunset != null) { 
+            var sunset = payload.sunset.split(":");
+            var sunsetTime = new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate(),
+              sunset[0],
+              sunset[1]
+            );
+          } else { 
+            var sunsetTime = new Date(
+              now.getFullYear(),
+              now.getMonth(),
+              now.getDate(), 17,1)
+          }
+          
           var n = now.getTime() >= sunsetTime.getTime() ? "night" : "day";
           var ret = payload.icon;
           var iconMap = {
@@ -93,7 +104,7 @@ Module.register("MMM-WeatherBackground", {
       ? this.config.payloadConverter
       : this.source.payloadConverter;
 
-    if (this.config.verbose) console.log("Weather source set to " + this.source);
+    if (this.config.verbose) console.log("Weather source set to " + this.source.notification);
 
     if (typeof this.config.externalCollections === "string") {
       fetch("modules/MMM-WeatherBackground/" + this.config.externalCollections)
@@ -132,12 +143,10 @@ Module.register("MMM-WeatherBackground", {
         : "#" + sender.data.identifier;
       var monthKeyword = this.monthMap[monthIndex];
       var description = this.payloadConverter(payload);
-      this.loadImage(target, {
-        monthKeyword,
-        description
-      });
+      this.loadImage(target, {monthKeyword, description});
     }
   },
+  
   //https://source.unsplash.com/collection/4733334/?winter,day,cloudy&s=1631542013371
   loadImage: function (target, { monthKeyword, description } = {}) {
     if (this.config.verbose) console.log("this.collections", this.collections);

@@ -181,7 +181,7 @@ Module.register("MMM-WeatherBackground", {
     }
 
     const size = this.config.size ? `/${this.config.size}` : "";
-    const url = getPhotoUrl(matchedCollection, size, convertedKeywords, seed)
+    const url = this.getPhotoUrl(matchedCollection, size, convertedKeywords, seed)
 
     var drawImage = (dom) => {
       var timer = setTimeout(() => {
@@ -199,7 +199,7 @@ Module.register("MMM-WeatherBackground", {
     doms.forEach((dom) => {
       drawImage(dom);
     });
-  }
+  },
 
   getPhotoUrl: function (matchedCollection, size, convertedKeywords, seed) {
     const baseUrl = "https://api.unsplash.com/photos/random"

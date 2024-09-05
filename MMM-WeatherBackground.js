@@ -30,6 +30,7 @@ Module.register("MMM-WeatherBackground", {
     defaultCollection: null, // When matched collection not found, this will be used.
     externalCollections: "collections.json", // or null
     collections: {},
+    clientID: "",
     sources: {
       weather: {
         notification: "CURRENTWEATHER_TYPE",
@@ -179,12 +180,9 @@ Module.register("MMM-WeatherBackground", {
       }
     }
 
-    var url = `https://source.unsplash.com`;
-    var size = this.config.size ? `/${this.config.size}` : "";
-    url += matchedCollection
-      ? `/collection/${matchedCollection}${size}/?&`
-      : `/featured/${size}?` + convertedKeywords.join(",") + "&";
-    url += `s=${seed}`;
+    const size = this.config.size ? `/${this.config.size}` : "";
+    const url = getPhotoUrl(matchedCollection, size, convertedKeywords, seed)
+
     var drawImage = (dom) => {
       var timer = setTimeout(() => {
         dom.classList.add("WTHBGR");
@@ -201,5 +199,15 @@ Module.register("MMM-WeatherBackground", {
     doms.forEach((dom) => {
       drawImage(dom);
     });
+  }
+
+  getPhotoUrl: function (matchedCollection, size, convertedKeywords, seed) {
+    const baseUrl = "https://api.unsplash.com/photos/random"
+    const query = convertedKeywords.join("+")
+
+    const response = await fetch(baseUrl + "?query=" + query + "&client_id=" + this.config.clientID)
+    const data = await response.json()
+
+    return data.urls.full
   }
 });

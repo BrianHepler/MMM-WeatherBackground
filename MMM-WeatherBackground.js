@@ -128,7 +128,7 @@ Module.register("MMM-WeatherBackground", {
     }
   },
 
-  notificationReceived: function (notification, payload, sender) {
+  notificationReceived: async function (notification, payload, sender) {
     var now = new Date();
     var monthIndex = now.getMonth();
 
@@ -144,12 +144,12 @@ Module.register("MMM-WeatherBackground", {
         : "#" + sender.data.identifier;
       var monthKeyword = this.monthMap[monthIndex];
       var description = this.payloadConverter(payload);
-      this.loadImage(target, {monthKeyword, description});
+      await this.loadImage(target, {monthKeyword, description});
     }
   },
   
   //https://source.unsplash.com/collection/4733334/?winter,day,cloudy&s=1631542013371
-  loadImage: function (target, { monthKeyword, description } = {}) {
+  loadImage: async function (target, { monthKeyword, description } = {}) {
     if (this.config.verbose) console.log("this.collections", this.collections);
     var seed = Date.now();
     var convertedKeywords = (monthKeyword + " " + description).split(" ");
@@ -181,7 +181,7 @@ Module.register("MMM-WeatherBackground", {
     }
 
     const size = this.config.size ? `/${this.config.size}` : "";
-    const url = this.getPhotoUrl(matchedCollection, size, convertedKeywords, seed)
+    const url = await this.getPhotoUrl(matchedCollection, size, convertedKeywords, seed)
 
     var drawImage = (dom) => {
       var timer = setTimeout(() => {
@@ -201,7 +201,7 @@ Module.register("MMM-WeatherBackground", {
     });
   },
 
-  getPhotoUrl: function (matchedCollection, size, convertedKeywords, seed) {
+  getPhotoUrl: async function (matchedCollection, size, convertedKeywords, seed) {
     const baseUrl = "https://api.unsplash.com/photos/random"
     const query = convertedKeywords.join("+")
 

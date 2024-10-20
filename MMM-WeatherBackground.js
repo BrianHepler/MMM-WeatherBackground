@@ -30,6 +30,7 @@ Module.register("MMM-WeatherBackground", {
     defaultCollection: null, // When matched collection not found, this will be used.
     externalCollections: "collections.json", // or null
     collections: {},
+    clientID: "",
     sources: {
       weather: {
         notification: "CURRENTWEATHER_TYPE",
@@ -127,7 +128,7 @@ Module.register("MMM-WeatherBackground", {
     }
   },
 
-  notificationReceived: function (notification, payload, sender) {
+  notificationReceived: async function (notification, payload, sender) {
     var now = new Date();
     var monthIndex = now.getMonth();
 
@@ -143,12 +144,12 @@ Module.register("MMM-WeatherBackground", {
         : "#" + sender.data.identifier;
       var monthKeyword = this.monthMap[monthIndex];
       var description = this.payloadConverter(payload);
-      this.loadImage(target, {monthKeyword, description});
+      await this.loadImage(target, {monthKeyword, description});
     }
   },
   
   //https://source.unsplash.com/collection/4733334/?winter,day,cloudy&s=1631542013371
-  loadImage: function (target, { monthKeyword, description } = {}) {
+  loadImage: async function (target, { monthKeyword, description } = {}) {
     if (this.config.verbose) console.log("this.collections", this.collections);
     var seed = Date.now();
     var convertedKeywords = (monthKeyword + " " + description).split(" ");
@@ -179,12 +180,9 @@ Module.register("MMM-WeatherBackground", {
       }
     }
 
-    var url = `https://source.unsplash.com`;
-    var size = this.config.size ? `/${this.config.size}` : "";
-    url += matchedCollection
-      ? `/collection/${matchedCollection}${size}/?&`
-      : `/featured/${size}?` + convertedKeywords.join(",") + "&";
-    url += `s=${seed}`;
+    const size = this.config.size ? `/${this.config.size}` : "";
+    const url = await this.getPhotoUrl(matchedCollection, size, convertedKeywords, seed)
+
     var drawImage = (dom) => {
       var timer = setTimeout(() => {
         dom.classList.add("WTHBGR");
@@ -201,5 +199,15 @@ Module.register("MMM-WeatherBackground", {
     doms.forEach((dom) => {
       drawImage(dom);
     });
+  },
+
+  getPhotoUrl: async function (matchedCollection, size, convertedKeywords, seed) {
+    const baseUrl = "https://api.unsplash.com/photos/random"
+    const query = convertedKeywords.join("+")
+
+    const response = await fetch(baseUrl + "?query=" + query + "&client_id=" + this.config.clientID)
+    const data = await response.json()
+
+    return data.urls.full
   }
 });

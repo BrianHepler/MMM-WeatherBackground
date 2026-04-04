@@ -35,7 +35,8 @@ Module.register("MMM-WeatherBackground", {
       weather: {
         notification: "CURRENTWEATHER_TYPE",
         payloadConverter: (payload) => {
-          return payload.type.replaceAll("_", " ");
+          return (payload.type || payload.weatherType || payload?.current?.weather?.[0]?.main || "clouds").replaceAll("-", "");
+
         }
       },
       "MMM-NOAA3": {

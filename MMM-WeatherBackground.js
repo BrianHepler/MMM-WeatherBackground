@@ -31,6 +31,7 @@ Module.register("MMM-WeatherBackground", {
     externalCollections: "collections.json", // or null
     collections: {},
     clientID: "",
+    unsplashSize: "full",
     sources: {
       weather: {
         notification: "CURRENTWEATHER_TYPE",
@@ -209,6 +210,19 @@ Module.register("MMM-WeatherBackground", {
     const response = await fetch(baseUrl + "?query=" + query + "&client_id=" + this.config.clientID)
     const data = await response.json()
 
-    return data.urls.full
+    switch(this.config.unsplashSize) {
+      case "raw":
+        return data.urls.raw
+      case "full":
+        return data.urls.full
+      case "regular":
+        return data.urls.regular
+      case "small":
+        return data.urls.small
+      case "thumb":
+        return data.urls.thumb
+      default:
+        return data.urls.full
+    }
   }
 });
